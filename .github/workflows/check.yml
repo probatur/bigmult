@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Next Ridge Solutions Ltd
+name: check
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  coqchk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - run: docker build --no-cache --progress=plain --build-arg JOBS=2 .
