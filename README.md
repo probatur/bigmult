@@ -36,12 +36,31 @@ cd bigmult
 docker build .
 ```
 
-The build compiles every proof from source in the public Coq 8.20.1 image, pinned by digest in the Dockerfile,
-then re-checks the whole development, together with the parts of Coq's standard library it uses, with coqchk,
-Coq's independent kernel checker. It fails unless coqchk accepts everything and reports no axioms, and its last
+The build compiles every proof from source in the public Rocq 9.2 image, pinned by digest in the Dockerfile,
+then re-checks the whole development, together with the parts of Rocq's standard library it uses, with rocqchk,
+Rocq's independent kernel checker. It fails unless rocqchk accepts everything and reports no axioms, and its last
 step prints the theorem exactly as the kernel states it, with the two definitions it is stated with (reproduced
 below). With BuildKit, add `--progress=plain` to see every line. The same build runs on every push, from
 `.github/workflows/check.yml`. If you run it, you are welcome to add a line to [REPRODUCTIONS.md](REPRODUCTIONS.md).
+
+## Rocq 9.2 and the Coq legacy version
+
+The proofs now build with Rocq 9.2 (`coq/`, checked by `docker build .`). The published Coq 8.20.1 version is kept
+verbatim in `coq-legacy/`, with its own one-command check, which uses the same pinned Coq 8.20.1 image as before:
+
+```
+docker build -f Dockerfile.legacy .
+```
+
+The changes from `coq-legacy/` to `coq/` are imports only: `From Coq Require ...` became `From Stdlib Require ...`,
+and the two fully qualified paths `Coq.Arith.Arith` and `Coq.ZArith.Zpow_facts` (in `range_field_pasta.v`) became
+`Stdlib.Arith.Arith` and `Stdlib.ZArith.Zpow_facts`. No definition, lemma or theorem statement, and no proof, was
+changed.
+
+The statement block below was captured from the Coq 8.20.1 check. Rocq 9.2 prints the same statement, except that
+argument-scope annotations are written with an underscore (`%_function_scope`, `%_list_scope` instead of
+`%function_scope`, `%list_scope`): a change in the printer, not in the theorem. The check scripts differ only in the tool names (`rocq makefile`, `rocqchk`, `rocq c` in place of
+`coq_makefile`, `coqchk`, `coqc`).
 
 ## The theorem, as the kernel states it
 
@@ -187,6 +206,7 @@ zero-knowledge proof for each execution. None of those is in this repository, an
 
 | file | what it holds |
 |---|---|
+| `coq-legacy/` | the Coq 8.20.1 version as published, same layout as `coq/`; checked by `check-legacy.sh` |
 | `coq/spec/bm_rule.v` | the rule: `PRE_bm`, `REL_bm`, `adequate`, and facts about it |
 | `coq/constraints/gen/bm_model_gen.v` | the circuit's constraint model: the field prime, the 930 polynomial constraints, the 8 copy constraints |
 | `coq/constraints/gen/bm_scaffold_gen.v` | cells, assignments, evaluation, and the acceptance predicate `sat` |
