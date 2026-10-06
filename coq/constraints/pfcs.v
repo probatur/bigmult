@@ -7,9 +7,9 @@
 
    Scope: these results bind the formal (Coq) layer only; the generated constraint model's fidelity to the circuit implementation, and the implementation itself, are outside them. *)
 
-From Coq Require Import Init.Datatypes.
-From Coq Require Import Lists.List.
-From Coq Require Import Arith.PeanoNat.
+From Stdlib Require Import Init.Datatypes.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Arith.PeanoNat.
 
 Import ListNotations.
 

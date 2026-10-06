@@ -6,14 +6,14 @@
 
    Scope: these results bind the formal (Coq) layer only; the generated constraint model's fidelity to the circuit implementation, and the implementation itself, are outside them. *)
 
-From Coq Require Import ZArith Lia List String Znumtheory.
+From Stdlib Require Import ZArith Lia List String Znumtheory.
 Import ListNotations.
 Open Scope Z_scope.
 From Constraints Require Import pfcs range_field.
 
-Require Import Coq.Arith.Arith Coq.ZArith.Zpow_facts.
+Require Import Stdlib.Arith.Arith Stdlib.ZArith.Zpow_facts.
 
-From Coq Require Import ZArith Lia List Arith.
+From Stdlib Require Import ZArith Lia List Arith.
 Import ListNotations.
 Open Scope nat_scope.
 
@@ -101,7 +101,7 @@ Proof.
     rewrite <- seq_S. fold (bsum x n). rewrite Hbs. ring.
 Qed.
 
-From Coq Require Import Znumtheory Zpow_facts.
+From Stdlib Require Import Znumtheory Zpow_facts.
 
 Lemma binom_n_n n : binom n n = 1%nat.
 Proof.

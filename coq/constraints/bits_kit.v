@@ -6,7 +6,7 @@
 
    Scope: these results bind the formal (Coq) layer only; the generated constraint model's fidelity to the circuit implementation, and the implementation itself, are outside them. *)
 
-From Coq Require Import ZArith Lia List Znumtheory Zpow_facts.
+From Stdlib Require Import ZArith Lia List Znumtheory Zpow_facts.
 Import ListNotations. Open Scope Z_scope.
 Require Import Constraints.field_order_lift.
 
