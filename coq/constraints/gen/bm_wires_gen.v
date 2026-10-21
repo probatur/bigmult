@@ -5,7 +5,7 @@
 
    Scope: these results bind the formal (Coq) layer only; the generated constraint model's fidelity to the circuit implementation, and the implementation itself, are outside them. *)
 
-From Coq Require Import ZArith List. Import ListNotations. Open Scope Z_scope.
+From Stdlib Require Import ZArith List. Import ListNotations. Open Scope Z_scope.
 Require Import Generated.bm_model_gen.
 
 Definition wcopy_1 : Cell * Cell := ((8%nat, 0%nat), (2000%nat, 0%nat)).

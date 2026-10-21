@@ -6,7 +6,7 @@
 
    Scope: these results bind the formal (Coq) layer only; the generated constraint model's fidelity to the circuit implementation, and the implementation itself, are outside them. *)
 
-From Coq Require Import ZArith List. Import ListNotations. Open Scope Z_scope.
+From Stdlib Require Import ZArith List. Import ListNotations. Open Scope Z_scope.
 
 Definition Cell := (nat * nat)%type.
 Inductive Expr := EConst (_:Z) | ECell (_:Cell) | EAdd (_ _:Expr) | ESub (_ _:Expr) | EMul (_ _:Expr) | ENeg (_:Expr) | EScaled (_:Expr) (_:Z).

@@ -7,7 +7,7 @@
 
    Scope: these results bind the formal (Coq) layer only; the generated constraint model's fidelity to the circuit implementation, and the implementation itself, are outside them. *)
 
-From Coq Require Import ZArith List Lia. Import ListNotations. Open Scope Z_scope.
+From Stdlib Require Import ZArith List Lia. Import ListNotations. Open Scope Z_scope.
 Require Import Generated.bm_model_gen.
 Require Import Generated.bm_wires_gen.
 Require Import Generated.bm_scaffold_gen.
